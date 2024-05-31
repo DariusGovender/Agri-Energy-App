@@ -1,0 +1,96 @@
+﻿<style>
+    :root {
+        --text: #070809;
+        --background: #f7f9fa;
+        --primary: #386a8a;
+        --secondary: #96c1db;
+        --accent: #6cb1dc;
+    }
+
+    .form-label {
+        color: var(--text);
+    }
+
+    .form-control {
+        background-color: var(--background);
+        border: 1px solid var(--accent);
+        border-radius: 5px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .custom-button {
+        background-color: var(--primary);
+        border: 1px solid var(--accent);
+        color: var(--text);
+        border-radius: 5px;
+        padding: 8px 16px;
+        margin-top: 10px;
+    }
+
+        .custom-button:hover {
+            background-color: var(--accent);
+            color: var(--background);
+        }
+
+    .custom-card {
+        background-color: var(--secondary);
+        border: 1px solid var(--accent);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .custom-input {
+        background-color: var(--background); /* Changed input background to match overall background */
+        border: 1px solid var(--accent);
+        border-radius: 15px;
+        padding: 10px; /* Added padding to inputs */
+        width: 100%; /* Full width input */
+    }
+
+    .form-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-content {
+        flex: 1;
+    }
+     .card-image {
+            margin-left: 20px;
+            max-width: 300px; 
+     }
+
+</style>
+
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card custom-card">
+            <h1 class="text-center">Login</h1>
+            <h2 class="text-center" style="color:red">@ViewBag.Error</h2>
+            <div class="card-body">
+                <h4 class="text-center mb-4">Enter your login details</h4>
+                <div class="form-container">
+                    <div class="form-content">
+                        <form asp-action="Login">
+                            <div class="form-group mb-3">
+                                <label class="control-label custom-text">Email</label>
+                                <input name="email" class="custom-input" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="control-label custom-text">Password</label>
+                                <input name="password" type="password" class="custom-input" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Login" class="btn custom-button" />
+                                <a asp-action="Home" class="btn custom-button">Back</a>
+                            </div>
+                        </form>
+                    </div>
+                    <img src="~/images/login_img02.png" alt="Login image" class="card-image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

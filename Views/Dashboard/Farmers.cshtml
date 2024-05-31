@@ -1,0 +1,90 @@
+﻿
+<style>
+    :root {
+        --text: #070809;
+        --background: #f7f9fa;
+        --primary: #386a8a;
+        --secondary: #96c1db;
+        --accent: #6cb1dc;
+    }
+
+    .form-label {
+        color: var(--text);
+    }
+
+    .form-control {
+        background-color: var(--background);
+        border: 1px solid var(--accent);
+        border-radius: 5px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .custom-button {
+        background-color: var(--primary);
+        border: 1px solid var(--accent);
+        color: var(--text);
+        border-radius: 5px;
+        padding: 8px 16px;
+        margin-top: 10px;
+    }
+
+        .custom-button:hover {
+            background-color: var(--accent);
+            color: var(--background);
+        }
+
+    .custom-card {
+        background-color: var(--secondary);
+        border: 1px solid var(--accent);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .custom-input {
+        background-color: var(--background); /* Changed input background to match overall background */
+        border: 1px solid var(--accent);
+        border-radius: 15px;
+        padding: 10px; /* Added padding to inputs */
+        width: 100%; /* Full width input */
+    }
+</style>
+
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1>Farmers Dashboard</h1>
+    </div>
+
+    <div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center custom-text">Inventory</h2>
+                        <p class="card-text text-center">Click here to view inventory</p>
+                        <div class="text-center">
+                            <a asp-action="ViewProducts" class="btn custom-button">View Products</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center custom-text">Add Product</h2>
+                        <p class="card-text text-center">Click here to add a product</p>
+                        <div class="text-center">
+                            <a asp-action="AddProduct" class="custom-button">Add product</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

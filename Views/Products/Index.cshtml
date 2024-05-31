@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Agri_Energy_Application.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    :root {
+        --text: #070809;
+        --background: #f7f9fa;
+        --primary: #386a8a;
+        --secondary: #96c1db;
+        --accent: #6cb1dc;
+    }
+
+    h1, h4 {
+        color: var(--text);
+    }
+
+    :root {
+        --text: #070809;
+        --background: #f7f9fa;
+        --primary: #386a8a;
+        --secondary: #96c1db;
+        --accent: #6cb1dc;
+    }
+
+    .form-label {
+        color: var(--text);
+    }
+
+    .form-control {
+        background-color: var(--background);
+        border: 1px solid var(--accent);
+        border-radius: 5px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .custom-button {
+        background-color: var(--primary);
+        border: 1px solid var(--accent);
+        color: var(--text);
+        border-radius: 5px;
+        padding: 8px 16px;
+        margin-top: 10px;
+    }
+
+        .custom-button:hover {
+            background-color: var(--accent);
+            color: var(--background);
+        }
+
+    .custom-card {
+        background-color: var(--secondary);
+        border: 1px solid var(--accent);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .custom-input {
+        background-color: var(--background); /* Changed input background to match overall background */
+        border: 1px solid var(--accent);
+        border-radius: 15px;
+        padding: 10px; /* Added padding to inputs */
+        width: 40%; /* Full width input */
+    }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .custom-table th,
+        .custom-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .custom-table th {
+            background-color: var(--primary);
+            color: var(--text);
+        }
+
+        .custom-table tbody tr:nth-child(even) {
+            background-color: var(--background);
+        }
+</style>
+
+<h1>Product List</h1>
+
+<form asp-controller="Products" asp-action="Index">
+    <p>
+        Search by product name or category: <input type="text" name="search" class="custom-input" />
+        <input type="submit" value="Filter" class="custom-button" />
+    </p>
+</form>
+
+<hr />
+
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductionDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductionDate)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn custom-button">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Back" class="btn custom-button">Back</a>
+</div>

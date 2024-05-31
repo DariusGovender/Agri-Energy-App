@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Agri_Energy_Application</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Agri_Energy_Application.styles.css" asp-append-version="true" />
+</head>
+
+<style>
+    :root {
+        --text: #070809;
+        --background: #f7f9fa;
+        --primary: #386a8a;
+        --secondary: #96c1db;
+        --accent: #6cb1dc;
+    }
+
+    .boxed-link {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 2px solid var(--accent);
+        border-radius: 15px;
+        text-decoration: none;
+        color: var(--text);
+    }
+
+        .boxed-link:hover {
+            background-color: var(--accent);
+            color: #fff;
+        }
+
+    header {
+        background-color: var(--background);
+    }
+
+    body {
+        background-color: var(--background);
+    }
+
+    .navbar {
+        background-color: var(--secondary);
+    }
+
+    .navbar-nav .nav-link {
+        color: var(--secondary);
+    }
+
+    .navbar-nav {
+        display: flex;
+    }
+
+    .nav-item {
+        margin-right: 10px; /* Adjust the value to set the desired space between items */
+    }
+
+    .dropdown-toggle {
+        color: var(--text); /* Text color */
+        background-color: var(--secondary); /* Background color */
+        border-color: var(--secondary); /* Border color */
+        border-radius: 5px;
+    }
+
+        .dropdown-toggle:hover {
+            color: var(--text); /* Text color on hover */
+            background-color: var(--accent); /* Background color on hover */
+            border-color: var(--accent); /* Border color on hover */
+        }
+
+        .dropdown-toggle:focus {
+            color: var(--text); /* Text color when focused */
+            background-color: var(--accent); /* Background color when focused */
+            border-color: var(--accent); /* Border color when focused */
+            box-shadow: 0 0 0 0.25rem rgba(113, 131, 85, 0.5); /* Focus shadow */
+        }
+
+    .dropdown-item {
+        color: var(--text); /* Text color */
+        background-color: var(--background); /* Background color */
+        padding: 10px 20px; /* Padding */
+        border-radius: 5px;
+    }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background-color: var(--primary); /* Background color on hover/focus */
+            color: var(--accent); /* Text color on hover/focus */
+        }
+
+    /* Style for dropdown menu */
+    .dropdown-menu {
+        border: 1px solid var(--accent);
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: var(--background);
+    }
+
+    .username {
+        color: var(--text); /* Text color */
+        padding: 10px 20px; /* Padding */
+
+</style>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark boxed-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        @{
+                            if (Context.Session.GetString("UserRole") == "Farmer")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark boxed-link" asp-area="" asp-controller="Home" asp-action="Farmer">Dashboard</a>
+                                </li>
+                            }
+                            else if (Context.Session.GetString("UserRole") == "Employee")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark boxed-link" asp-area="" asp-controller="Home" asp-action="Employees">Dashboard</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    @{
+                        if (Context.Session.GetString("LoggedInUser") == null)
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark boxed-link" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown ms-auto">
+                                    <!-- Add ms-auto to move dropdown to right end -->
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+                                        </svg>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <!-- Add dropdown-menu-end class -->
+                                        <li class="username">@TempData["Username"]</li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        }
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
