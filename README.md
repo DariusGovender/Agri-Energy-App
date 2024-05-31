@@ -8,9 +8,42 @@ Welcome to the Agri-Energy Connect Platform Prototype! This README provides deta
    
 2. **Clone Repository**: Clone the repository containing the prototype code to your local machine.
    
-3. **Database Setup**:
-   - Design and create a relational database to manage information about farmers and products.
-   - Populate the database with sample data to simulate real-world scenarios.
+3. **Create Database AgriEnergy**:
+   - Execute the following SQL script to create the database and tables:
+
+```sql
+CREATE DATABASE AgriEnergy;
+
+USE AgriEnergy;
+
+CREATE TABLE Users (
+    Email VARCHAR(255) PRIMARY KEY NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Role VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Employee (
+    EmployeeId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    FullName VARCHAR(150) NOT NULL,
+    Email VARCHAR(255) FOREIGN KEY REFERENCES Users(Email)
+);
+
+CREATE TABLE Farmer (
+    FarmerId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    Email VARCHAR(255) FOREIGN KEY REFERENCES Users(Email),
+    FullName VARCHAR(150) NOT NULL,
+    ContactNumber VARCHAR(10) NOT NULL,
+    Address VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Product (
+    ProductId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    FarmerId INT FOREIGN KEY REFERENCES Farmer(FarmerId),
+    ProductName VARCHAR(255) NOT NULL,
+    Category VARCHAR(255) NOT NULL,
+    ProductionDate DATE NOT NULL
+);
+```
    
 4. **Install Dependencies**: Ensure that all necessary dependencies, such as Entity Framework, are installed.
    
