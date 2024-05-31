@@ -50,11 +50,19 @@ namespace Agri_Energy_Application.Controllers
 
             if (ModelState.IsValid)
             {
+                if (exsistingUser == false)
+                {
                     HttpContext.Session.SetString("createdUser", user.Email);
 
                     _context.Users.Add(user);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Create", "Farmers");
+                }
+                else 
+                {
+                    ModelState.AddModelError("Email", "Email already exsists");
+                }
+                    
             }
             return View(user);
         }
