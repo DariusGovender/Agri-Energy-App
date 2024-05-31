@@ -4,6 +4,57 @@
     ViewData["Title"] = "Delete";
 }
 
+<style>
+    :root {
+        --text: #070809;
+        --background: #f7f9fa;
+        --primary: #386a8a;
+        --secondary: #96c1db;
+        --accent: #6cb1dc;
+    }
+
+    .form-label {
+        color: var(--text);
+    }
+
+    .form-control {
+        background-color: var(--background);
+        border: 1px solid var(--accent);
+        border-radius: 5px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .custom-button {
+        background-color: var(--primary);
+        border: 1px solid var(--accent);
+        color: var(--text);
+        border-radius: 5px;
+        padding: 8px 16px;
+        margin-top: 10px;
+    }
+
+        .custom-button:hover {
+            background-color: var(--accent);
+            color: var(--background);
+        }
+
+    .custom-card {
+        background-color: var(--secondary);
+        border: 1px solid var(--accent);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .custom-input {
+        background-color: var(--background); /* Changed input background to match overall background */
+        border: 1px solid var(--accent);
+        border-radius: 15px;
+        padding: 10px; /* Added padding to inputs */
+        width: 100%; /* Full width input */
+    }
+</style>
+
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -40,6 +91,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ProductId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index" class="custom-button">Back</a>
     </form>
 </div>

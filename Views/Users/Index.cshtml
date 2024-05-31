@@ -4,16 +4,102 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<style>
+    :root {
+        --text: #070809;
+        --background: #f7f9fa;
+        --primary: #386a8a;
+        --secondary: #96c1db;
+        --accent: #6cb1dc;
+    }
+
+    h1, h4 {
+        color: var(--text);
+    }
+
+    :root {
+        --text: #070809;
+        --background: #f7f9fa;
+        --primary: #386a8a;
+        --secondary: #96c1db;
+        --accent: #6cb1dc;
+    }
+
+    .form-label {
+        color: var(--text);
+    }
+
+    .form-control {
+        background-color: var(--background);
+        border: 1px solid var(--accent);
+        border-radius: 5px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .custom-button {
+        background-color: var(--primary);
+        border: 1px solid var(--accent);
+        color: var(--text);
+        border-radius: 5px;
+        padding: 8px 16px;
+        margin-top: 10px;
+    }
+
+        .custom-button:hover {
+            background-color: var(--accent);
+            color: var(--background);
+        }
+
+    .custom-card {
+        background-color: var(--secondary);
+        border: 1px solid var(--accent);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .custom-input {
+        background-color: var(--background); /* Changed input background to match overall background */
+        border: 1px solid var(--accent);
+        border-radius: 15px;
+        padding: 10px; /* Added padding to inputs */
+        width: 40%; /* Full width input */
+    }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .custom-table th,
+        .custom-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .custom-table th {
+            background-color: var(--primary);
+            color: var(--text);
+        }
+
+        .custom-table tbody tr:nth-child(even) {
+            background-color: var(--background);
+        }
+</style>
+
+<h1>List of Farmers</h1>
+<hr>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Password)
+                @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Role)
@@ -25,15 +111,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Email">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Email">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Email">Delete</a>
+                    <a asp-action="EmployeeBackFunction" class="btn custom-button">Back</a>
             </td>
         </tr>
 }

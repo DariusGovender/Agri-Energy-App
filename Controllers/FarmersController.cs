@@ -35,25 +35,6 @@ namespace Agri_Energy_Application.Controllers
             return RedirectToAction("Create", "Users");
         }
 
-        // GET: Farmers/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmer = await _context.Farmers
-                .Include(f => f.EmailNavigation)
-                .FirstOrDefaultAsync(m => m.FarmerId == id);
-            if (farmer == null)
-            {
-                return NotFound();
-            }
-
-            return View(farmer);
-        }
-
         // GET: Farmers/Create
         public IActionResult Create()
         {
@@ -102,93 +83,6 @@ namespace Agri_Energy_Application.Controllers
             }
             ViewData["Email"] = new SelectList(_context.Users, "Email", "Email", farmer.Email);
             return View(farmer);
-        }
-
-        // GET: Farmers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmer = await _context.Farmers.FindAsync(id);
-            if (farmer == null)
-            {
-                return NotFound();
-            }
-            ViewData["Email"] = new SelectList(_context.Users, "Email", "Email", farmer.Email);
-            return View(farmer);
-        }
-
-        // POST: Farmers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FarmerId,Email,FullName,ContactNumber,Address")] Farmer farmer)
-        {
-            if (id != farmer.FarmerId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(farmer);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FarmerExists(farmer.FarmerId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["Email"] = new SelectList(_context.Users, "Email", "Email", farmer.Email);
-            return View(farmer);
-        }
-
-        // GET: Farmers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var farmer = await _context.Farmers
-                .Include(f => f.EmailNavigation)
-                .FirstOrDefaultAsync(m => m.FarmerId == id);
-            if (farmer == null)
-            {
-                return NotFound();
-            }
-
-            return View(farmer);
-        }
-
-        // POST: Farmers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var farmer = await _context.Farmers.FindAsync(id);
-            if (farmer != null)
-            {
-                _context.Farmers.Remove(farmer);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool FarmerExists(int id)
