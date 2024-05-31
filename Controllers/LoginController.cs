@@ -30,18 +30,18 @@ namespace Agri_Energy_App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Index(string email, string password)
         {
             try
             {
                 User u = _context.Users.Where(user => user.Email.Equals(email)).FirstOrDefault();
-                string currentUser = u.Email;
-                string role = u.Role;
 
                 AuthLogger auth = new AuthLogger();
 
                 if (u != null && u.Password == password)
                 {
+                    string currentUser = u.Email;
+                    string role = u.Role;
                     if (role == "Farmer")
                     {
                         HttpContext.Session.SetString("LoggedInUser", currentUser);

@@ -46,14 +46,15 @@ namespace Agri_Energy_Application.Controllers
 
             TempData["Username"] = username;
             TempData["Role"] = role;
+            bool exsistingUser = _context.Users.Any(u => u.Email == user.Email);
 
             if (ModelState.IsValid)
             {
-                HttpContext.Session.SetString("createdUser", user.Email);
+                    HttpContext.Session.SetString("createdUser", user.Email);
 
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "Farmers");
+                    _context.Users.Add(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Create", "Farmers");
             }
             return View(user);
         }

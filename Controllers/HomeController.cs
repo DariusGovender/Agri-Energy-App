@@ -8,9 +8,11 @@ namespace Agri_Energy_Application.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ArgiEnergyContext _context;
+        public HomeController(ILogger<HomeController> logger, ArgiEnergyContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
