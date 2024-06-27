@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Configure session options
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -13,6 +14,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// Configure DbContext
 builder.Services.AddDbContext<ArgiEnergyContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ArgiEnergy")));
 

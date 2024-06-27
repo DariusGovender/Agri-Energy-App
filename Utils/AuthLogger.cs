@@ -6,22 +6,15 @@ namespace Agri_Energy_Application.Utils
 {
     public class AuthLogger
     {
+        // Singleton instance
         public static readonly AuthLogger instance = new AuthLogger();
 
         private readonly StreamWriter errorFileWriter;
         private readonly StreamWriter loginAttemptsFileWriter;
-        
-        /*
-        private AuthLogger()
-        {
-            loginAttemptsFileWriter = new StreamWriter("auth_errors.log", true);
-            loginAttemptsFileWriter.AutoFlush = true;
-        }
-        */
 
+        //Logs a failed login attempt into a textfile
         public void LogError(string username)
         {
-            //string username = "empty";
             string loginAttemptMessage = $"{DateTime.Now} - FAILED LOGIN ATTEMPT: {username}";
             string logFilePath = Path.Combine("logs", "auth_errors.log");
 
@@ -31,6 +24,7 @@ namespace Agri_Energy_Application.Utils
             }
         }
 
+        //Logs a successful login attempt into a textfile
         public void LogSuccess(string username)
         {
             string loginAttemptMessage = $"{DateTime.Now} - SUCCESSFUL LOGIN ATTEMPT: {username}";
@@ -42,9 +36,9 @@ namespace Agri_Energy_Application.Utils
             }
         }
 
+        // Clear the content of both log files
         public void ClearLog()
         {
-            // Clear the content of both log files
             errorFileWriter.Flush();
             errorFileWriter.BaseStream.SetLength(0);
 

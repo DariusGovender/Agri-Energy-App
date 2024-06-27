@@ -4,17 +4,22 @@ using System.Diagnostics;
 
 namespace Agri_Energy_Application.Controllers
 {
+
+    // Controller for handling home-related action
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
         private readonly ArgiEnergyContext _context;
+
+        // Constructor to initialize logger and database context.
         public HomeController(ILogger<HomeController> logger, ArgiEnergyContext context)
         {
-            _logger = logger;
-            _context = context;
+            _logger = logger; // Logger instance
+            _context = context; // Database context
         }
 
+        //  Action method for the home page
         public IActionResult Index()
         {
             string username = HttpContext.Session.GetString("LoggedInUser");
@@ -28,11 +33,13 @@ namespace Agri_Energy_Application.Controllers
             return View();
         }
 
+        // Redirects to the login page
         public IActionResult Login()
         {
             return RedirectToAction("Index", "Login");
         }
 
+        //Logs out the current user
         public IActionResult Logout()
         {
             if (HttpContext.Session.GetString("LoggedInUser") != null)
@@ -47,11 +54,13 @@ namespace Agri_Energy_Application.Controllers
             }
         }
 
+        //Redirects to the farmers dashboard page
         public IActionResult Farmer()
         {
             return RedirectToAction("Farmers", "Dashboard");
         }
 
+        //Redirects to the employees dashboard page
         public IActionResult Employees()
         {
             return RedirectToAction("Employees", "Dashboard");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Agri_Energy_Application.Models;
 
+//auto generated class for farmers based on database design
 public partial class Farmer
 {
     public int FarmerId { get; set; }

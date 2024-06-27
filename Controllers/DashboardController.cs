@@ -3,16 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Agri_Energy_Application.Controllers
 {
+    // Controller for handling dashboard-related actions
     public class DashboardController : Controller
     {
         private readonly ArgiEnergyContext _context;
 
+        // Constructor to initialize database context
         public DashboardController(ArgiEnergyContext context)
         {
-            _context = context;
+            _context = context; // Database context
         }
 
         // Employee Navigation
+
+        //Displays the employees dashboard
         public IActionResult Employees()
         {
             string username = HttpContext.Session.GetString("LoggedInUser");
@@ -26,7 +30,8 @@ namespace Agri_Energy_Application.Controllers
             return View();
         }
 
-        public IActionResult BackEmployee()
+        // Back button method for employees
+        public async Task<IActionResult> EmployeeBackFunction()
         {
             return RedirectToAction("Employees", "Dashboard");
         }
@@ -43,6 +48,7 @@ namespace Agri_Energy_Application.Controllers
 
         // Farmer Navigation
 
+        //Displays the farmers dashboard
         public IActionResult Farmers()
         {
             string username = HttpContext.Session.GetString("LoggedInUser");
@@ -56,7 +62,8 @@ namespace Agri_Energy_Application.Controllers
             return View();
         }
 
-        public IActionResult BackFarmer()
+        // Back button method for farmers
+        public async Task<IActionResult> Back()
         {
             return RedirectToAction("Farmers", "Dashboard");
         }

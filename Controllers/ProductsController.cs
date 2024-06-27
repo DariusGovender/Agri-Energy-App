@@ -18,11 +18,13 @@ namespace Agri_Energy_Application.Controllers
             _context = context;
         }
 
+        // Back button method for farmers
         public async Task<IActionResult> Back()
         {
             return RedirectToAction("Farmers", "Dashboard");
         }
 
+        // Back button method for employees
         public async Task<IActionResult> EmployeeBackFunction()
         {
             return RedirectToAction("Employees", "Dashboard");
@@ -46,9 +48,20 @@ namespace Agri_Energy_Application.Controllers
             {
                 products = products.Where(p => p.ProductName.Contains(search) || p.Category.Contains(search)).ToList();
             }
+            
+            // Filter by FarmerId
+          
 
-            // Filter by start date
-            if (startDate.HasValue)
+            if (!String.IsNullOrEmpty(search))
+            {
+                if (int.TryParse(search, out int searchInt))
+                {
+                    products = products.Where(p => p.FarmerId == searchInt).ToList();
+                }
+            }
+
+                // Filter by start date
+                if (startDate.HasValue)
             {
                 products = products.Where(p => p.ProductionDate >= startDate.Value).ToList();
             }
@@ -59,6 +72,7 @@ namespace Agri_Energy_Application.Controllers
                 products = products.Where(p => p.ProductionDate <= endDate.Value).ToList();
             }
 
+            // Filter by date range
             if (startDate.HasValue && endDate.HasValue)
             {
                 products = products.Where(p => p.ProductionDate >= startDate.Value && p.ProductionDate <= endDate.Value).ToList();
