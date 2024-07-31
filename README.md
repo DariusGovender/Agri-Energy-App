@@ -47,7 +47,7 @@ CREATE TABLE Product (
    
 4. **Install Dependencies**: Ensure that all necessary dependencies, such as Entity Framework, are installed.
    
-5. **Configure Connection String**: Update the connection string in the application configuration file (`app.config` or `web.config`) to point to your database.
+5. **Configure Connection String**: Update the connection string in the application configuration file (`appsettings.json`) to point to your database.
 
 ## Building and Running the Prototype
 
